@@ -13,17 +13,16 @@
 #include "owner.h"
 #include "jockey.h"
 
-
 enum user_type {owner = 1, jockey = 2, admin = 3};
 
 void Authentication(sqlite3* db);
 
-void LogIn(sqlite3* db, int* user_type, char* surname);
+void LogIn(sqlite3* db);
 
-void main_loop(sqlite3* db, int* user_type, char* surname);
+void main_loop(sqlite3* db);
 
 
-void Select1	(sqlite3* db, const char* surname);
+void Select1	(sqlite3* db, const char* surname = "*");
 void Select2	(sqlite3* db);
 void Select3	(sqlite3* db, const char* surname);
 void Select4	(sqlite3* db, const char* surname);
