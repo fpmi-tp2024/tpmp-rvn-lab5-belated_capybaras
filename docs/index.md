@@ -41,9 +41,11 @@
 
 [Информация в Базах Данных(документ со всеми данными в виде скриншотов)](./DataBase.md)
 
-[XML диаграмма классов](./Diagrams/XML_class_diagramm.png)
-[XML диаграмма серверной части](./Diagrams/XML_serverPart_Diagramm.png)
-[XML диаграмма клиентской части](./Diagrams/XML_UserPart_Diagramm.png)
+ 1. [XML диаграмма классов](./Diagrams/XML_class_diagramm.png)
+
+ 2. [XML диаграмма серверной части](./Diagrams/XML_serverPart_Diagramm.png)
+
+ 3. [XML диаграмма клиентской части](./Diagrams/XML_UserPart_Diagramm.png)
 
 ## Файлы прописываемые в Make
 ![](https://img.shields.io/badge/*.cpp-main%2C_owner%2C_jockey%2C_database%2C_authentification%2C_admin-blue)
