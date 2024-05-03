@@ -25,7 +25,7 @@ Database* createOwner(sqlite3* db, std::string sur)
 
 
 int main() {
-	const char* db_path = "/Users/daniilsolovyev/TP_Labs/TP_Lab_5/repo/tpmp-rvn-lab5-belated_capybaras/hippodrome.db";
+	const char* db_path = "hippodrome.db";
 	sqlite3* db;
 	int rc = sqlite3_open(db_path, &db);
 	if (rc)

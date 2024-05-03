@@ -46,7 +46,7 @@ $(BIN_DIR)/%: $(TEST_DIR)/%.cpp
 run: $(BIN_DIR)/program_exec
 	./$(BIN_DIR)/program_exec
 
-built: $(OBJS) $(BIN_DIR)/program_exec
+build: $(OBJS) $(BIN_DIR)/program_exec
 
 clean:
 	rm -rf $(OBJ_DIR)/*.o $(BIN_DIR)/*
