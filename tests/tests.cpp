@@ -8,7 +8,9 @@
 #include <sqlite3.h>
 
 sqlite3* db;
-int rc1 = sqlite3_open("hippodrome.db", &db);
+int rc1 = sqlite3_open("test.db", &db);
+
+int rc0 = sqlite3_exec(db, "DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS user_type; DROP TABLE IF EXISTS races; DROP TABLE IF EXISTS jockeys; DROP TABLE IF EXISTS horses;", nullptr, nullptr, nullptr);
 
 int rc2 = sqlite3_exec(db, "CREATE TABLE horses( id integer NOT NULL CONSTRAINT horses_pk PRIMARY KEY, name varchar(255), age integer, experience integer, owner varchar(255), price double ); CREATE TABLE jockeys( id integer NOT NULL CONSTRAINT jockeys_pk PRIMARY KEY, surname varchar(255), experience integer, year_of_birthday integer, address varchar(255) ); CREATE TABLE races( id integer NOT NULL CONSTRAINT races_pk PRIMARY KEY, date date, race_number integer, horse_id integer NOT NULL, jockey_id integer NOT NULL, taken_place integer, CONSTRAINT races_horses FOREIGN KEY(horse_id) REFERENCES horses(id), CONSTRAINT races_jockeys FOREIGN KEY(jockey_id) REFERENCES jockeys(id) ); CREATE TABLE user_type( id integer NOT NULL CONSTRAINT user_type_pk PRIMARY KEY, type varchar(255) NOT NULL ); CREATE TABLE users( id integer NOT NULL CONSTRAINT users_pk PRIMARY KEY, user_type integer NOT NULL, surname varchar(255) NOT NULL, password varchar(255) NOT NULL, CONSTRAINT users_user_type FOREIGN KEY(user_type) REFERENCES user_type(id) );", nullptr, nullptr, nullptr);
 
