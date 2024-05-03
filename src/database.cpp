@@ -29,24 +29,24 @@ int Database::callback(void* data, int argc, char** argv, char** azColName) {
 	return 0;
 }
 
-void Database::SignUp(){}
-void Database::LogIn(){}
+void Database::SignUp() {}
+void Database::LogIn() {}
 
 Database::Database(sqlite3* db, int type) : db(db), user_type(type) {}
 
-void Database::loop(){}
-void Database::Select4(){}
-void Database::Select1(){}
-void Database::Insert(){}
-void Database::Update(){}
-void Database::Delete(){}
-void Database::Select5(){}
-void Database::SelectAllOutRaces(){}
-void Database::Select2(){}
-void Database::prize_pool(){}
-void Database::divide_prize(double){}
-void Database::Select3(){}
-void Database::Select6(){}
+void Database::loop() {}
+void Database::Select4() {}
+void Database::Select1() {}
+void Database::Insert() {}
+void Database::Update() {}
+void Database::Delete() {}
+void Database::Select5() {}
+void Database::SelectAllOutRaces() {}
+void Database::Select2() {}
+void Database::prize_pool() {}
+void Database::divide_prize(double) {}
+void Database::Select3() {}
+void Database::Select6() {}
 
 int Database::getUserType() const
 {

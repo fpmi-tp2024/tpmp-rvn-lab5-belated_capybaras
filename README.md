@@ -8,7 +8,7 @@
 ## Исполнители:
 - [**Кохан Даниил**](https://github.com/ExiDola):heart_eyes: - *Mentor and DocWriter*
 - [**Башев Ян**](https://github.com/tafoiji) :racehorse:- *Main Coder*
-- [**Соловьёв Даниил**]() :fearful:- *Devops engineer* 
+- [**Соловьёв Даниил**](https://github.com/soldansd) :fearful:- *Devops engineer* 
 - [**Ходин Дмитрий**](https://github.com/rollcookie) :stuck_out_tongue_closed_eyes:- *The tester*
 
 ## Описание проекта:
@@ -40,9 +40,7 @@
    - [Ссылка на диаграмму](/doc/Diagrams/XML_class_diagramm.png)
 ## Реализация проекта:
 1. **Создание таблиц БД**: Созданы таблицы с учетом ограничений целостности данных.
-   - [Ссылка на БД 1](/doc/bd1.bmp)
-   - [Ссылка на БД 2](/doc/bd2.bmp)
-   - [Ссылка на БД 3](/doc/bd3.bmp)
+   - [Ссылка на БД DataBase.md](/doc/DataBase.md)
 2. **Запросы к БД**: Используя оператор `SELECT`, реализованы запросы по заданным критериям:
    - По лошади с максимальным количеством побед.
    - По жокею с наибольшим количеством участий в забегах.
