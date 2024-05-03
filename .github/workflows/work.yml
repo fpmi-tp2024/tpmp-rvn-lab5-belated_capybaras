@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main", "ExiDolaBranchDev", "YanBranchDev", "DimaBranchDev", "DanikBranchDev"]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: dependencies installation
+      run: sudo apt-get install libsqlite3-dev libssl-dev
+    - name: build
+      run: make build
