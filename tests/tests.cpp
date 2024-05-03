@@ -62,13 +62,19 @@ TEST_CASE("Test Authentification class") {
 }
 
 TEST_CASE("Test Admin class") {
-    sqlite3* db;
     int rc = sqlite3_open("test.db", &db);
     REQUIRE(rc == SQLITE_OK);
 
+    std::stringstream input("8\n");
+    std::cin.rdbuf(input.rdbuf());
+
     Admin admin(db);
 
-    SECTION("Test Insert") {
+    std::cin.rdbuf(std::cin.rdbuf());
+
+    SECTION("Test Insert") 
+    {
+
         std::stringstream input("2022-01-01\n1\n1\n1\n1\n");
         std::cin.rdbuf(input.rdbuf());
 
