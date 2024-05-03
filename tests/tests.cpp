@@ -7,11 +7,19 @@
 #include <sstream>
 #include <sqlite3.h>
 
+sqlite3* db;
+int rc1 = sqlite3_open("hippodrome.db", &db);
+
+int rc2 = sqlite3_exec(db, "CREATE TABLE horses( id integer NOT NULL CONSTRAINT horses_pk PRIMARY KEY, name varchar(255), age integer, experience integer, owner varchar(255), price double ); CREATE TABLE jockeys( id integer NOT NULL CONSTRAINT jockeys_pk PRIMARY KEY, surname varchar(255), experience integer, year_of_birthday integer, address varchar(255) ); CREATE TABLE races( id integer NOT NULL CONSTRAINT races_pk PRIMARY KEY, date date, race_number integer, horse_id integer NOT NULL, jockey_id integer NOT NULL, taken_place integer, CONSTRAINT races_horses FOREIGN KEY(horse_id) REFERENCES horses(id), CONSTRAINT races_jockeys FOREIGN KEY(jockey_id) REFERENCES jockeys(id) ); CREATE TABLE user_type( id integer NOT NULL CONSTRAINT user_type_pk PRIMARY KEY, type varchar(255) NOT NULL ); CREATE TABLE users( id integer NOT NULL CONSTRAINT users_pk PRIMARY KEY, user_type integer NOT NULL, surname varchar(255) NOT NULL, password varchar(255) NOT NULL, CONSTRAINT users_user_type FOREIGN KEY(user_type) REFERENCES user_type(id) );", nullptr, nullptr, nullptr);
+
+TEST_CASE("Init test db") 
+{
+    REQUIRE(rc1 == SQLITE_OK);
+    REQUIRE(rc2 == SQLITE_OK);
+}
 
 TEST_CASE("Test Authentification class") {
-    sqlite3* db;
-    int rc = sqlite3_open("test.db", &db);
-    REQUIRE(rc == SQLITE_OK);
+    
 
     Authentification auth(db);
 
@@ -25,7 +33,7 @@ TEST_CASE("Test Authentification class") {
 
         std::string sql = "SELECT * FROM users WHERE surname = 'test' AND password = 'test';";
         sqlite3_stmt* res;
-        rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
+        int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
         REQUIRE(rc == SQLITE_OK);
 
         int step = sqlite3_step(res);
@@ -143,14 +151,7 @@ TEST_CASE("Test Jockey class") {
 
     std::cin.rdbuf(std::cin.rdbuf());
 
-    rc = sqlite3_exec(db, "CREATE TABLE jockeys (id INTEGER PRIMARY KEY, surname TEXT)", nullptr, nullptr, nullptr);
-    REQUIRE(rc == SQLITE_OK);
-
-    rc = sqlite3_exec(db, "CREATE TABLE horses (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, experience INTEGER, owner TEXT)", nullptr, nullptr, nullptr);
-    REQUIRE(rc == SQLITE_OK);
-
-    rc = sqlite3_exec(db, "CREATE TABLE races (id INTEGER PRIMARY KEY, date TEXT, jockey_id INTEGER, horse_id INTEGER, price INTEGER, taken_place INTEGER)", nullptr, nullptr, nullptr);
-    REQUIRE(rc == SQLITE_OK);
+   
   
 
     SECTION("Test Select3") 
