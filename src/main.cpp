@@ -7,6 +7,7 @@
 #include "../inc/jockey.h"
 #include "../inc/admin.h"
 #include "../inc/owner.h"
+#include <functional>
 
 Database* createAdmin(sqlite3* db, std::string sur)
 {

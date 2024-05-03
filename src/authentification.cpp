@@ -1,5 +1,6 @@
 #include "../inc/authentification.h"
 #include <string>
+#include <functional>
 
 using std::string;
 
