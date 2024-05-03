@@ -2,7 +2,7 @@
 
 # Проект "Ипподром"
 
-## [Вариант: 4](/doc/4Var.docx)
+## [Вариант: 4](/doc/4Var.txt)
  - Лабораторная работа 5, БГУ, 2024г.
 
 ## Исполнители:
@@ -37,7 +37,7 @@
    - [x] Создать функцию, которая за указанный период выводит по указанному жокею
 сведения о забегах, где он участвовал(*).
    -[x] Работа с документацией.
-   - [Ссылка на диаграмму](/doc/Diagrams/XML_class_diagramm)
+   - [Ссылка на диаграмму](/doc/Diagrams/XML_class_diagramm.png)
 ## Реализация проекта:
 1. **Создание таблиц БД**: Созданы таблицы с учетом ограничений целостности данных.
    - [Ссылка на БД 1](/doc/bd1.bmp)
@@ -62,11 +62,7 @@
 )
 
 ## Используемый язык программирвания,СУБД, IDE и т.д. :
-<img src="https://simpleicons.org/icons/cplusplus.svg" alt="C++ Logo" width="100" height="100">
-<img src="https://simpleicons.org/icons/sqlite.svg" alt="C++ Logo" width="100" height="100">
-<img src="https://simpleicons.org/icons/visualstudiocode.svg" alt="C++ Logo" width="100" height="100">
-<img src="https://simpleicons.org/icons/visualstudio.svg" alt="C++ Logo" width="100" height="100">
-<img src="https://simpleicons.org/icons/git.svg" alt="C++ Logo" width="100" height="100">
+<img src="https://simpleicons.org/icons/cplusplus.svg" alt="C++ Logo" width="100" height="100"> <img src="https://simpleicons.org/icons/sqlite.svg" alt="C++ Logo" width="100" height="100"> <img src="https://simpleicons.org/icons/visualstudiocode.svg" alt="C++ Logo" width="100" height="100"> <img src="https://simpleicons.org/icons/visualstudio.svg" alt="C++ Logo" width="100" height="100"> <img src="https://simpleicons.org/icons/git.svg" alt="C++ Logo" width="100" height="100">
 
 
 
@@ -76,5 +72,5 @@
 <br><br>
 <br><br>
 ## Картинка забега лошадей с жокеями
-<div style="background-image: url('https://hotwalls.ru/wallpapers/horse_racing/download/1600x1200.jpg'); opacity: 0.4; height: 700px;">
-</div>
+<img src="https://hotwalls.ru/wallpapers/horse_racing/download/1600x1200.jpg" alt="Horse Racing" style="opacity: 0.4; height: 700px;">
+
