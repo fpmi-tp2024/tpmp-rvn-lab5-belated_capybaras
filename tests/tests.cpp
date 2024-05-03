@@ -3,7 +3,6 @@
 #include "../inc/authentification.h"
 #include "../inc/admin.h"
 #include "../inc/jockey.h"
-
 #include <sstream>
 #include <sqlite3.h>
 
