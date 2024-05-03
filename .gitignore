@@ -3,3 +3,5 @@ CMakeLists.txt
 hippodrome.db-journal
 cmake-build-debug/
 .idea/
+obj/
+bin/
