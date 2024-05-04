@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "../inc/admin.h"
+#include <functional>
 
 Admin::Admin(sqlite3* db): Database(db, 3)
 {

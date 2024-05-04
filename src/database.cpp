@@ -1,4 +1,5 @@
 #include "../inc/database.h"
+#include <functional>
 
 int Database::callback_user_type(void* data, int argc, char** argv, char** azColName)
 {

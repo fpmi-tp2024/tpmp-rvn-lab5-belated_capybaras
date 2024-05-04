@@ -1,4 +1,5 @@
 #include "../inc/jockey.h"
+#include <functional>
 
 Jockey::Jockey(sqlite3* db, std::string surname): Database(db, 2)
 {
