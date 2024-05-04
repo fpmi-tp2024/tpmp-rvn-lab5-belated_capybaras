@@ -45,7 +45,7 @@ TEST_CASE("Test Authentification class") {
         int step = sqlite3_step(res);
         REQUIRE(step == SQLITE_ROW);
 
-        sqlite3_finalize(true);
+        sqlite3_finalize(res);
     }
 
     SECTION("Test CanSignUp") {
@@ -86,7 +86,7 @@ TEST_CASE("Test Admin class") {
 
         std::string sql = "SELECT * FROM races WHERE date = '2022-01-01' AND race_number = 1 AND horse_id = 1 AND jockey_id = 1 AND taken_place = 1;";
         sqlite3_stmt* res;
-        rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
+        int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
         REQUIRE(rc == SQLITE_OK);
 
         int step = sqlite3_step(res);
@@ -105,7 +105,7 @@ TEST_CASE("Test Admin class") {
 
         std::string sql = "SELECT * FROM races WHERE id = 1 AND date = '2022-02-02' AND race_number = 2 AND horse_id = 2 AND jockey_id = 2 AND taken_place = 2;";
         sqlite3_stmt* res;
-        rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
+        int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
         REQUIRE(rc == SQLITE_OK);
 
         int step = sqlite3_step(res);
@@ -124,7 +124,7 @@ TEST_CASE("Test Admin class") {
 
         std::string sql = "SELECT * FROM races WHERE id = 1;";
         sqlite3_stmt* res;
-        rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
+        int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
         REQUIRE(rc == SQLITE_OK);
 
         int step = sqlite3_step(res);
