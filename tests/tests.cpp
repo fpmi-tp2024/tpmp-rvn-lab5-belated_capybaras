@@ -40,7 +40,7 @@ TEST_CASE("Test Authentification class") {
         std::string sql = "SELECT * FROM users WHERE surname = 'test' AND password = 'test';";
         sqlite3_stmt* res;
         int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
-        REQUIRE(true);
+        REQUIRE(rc == SQLITE_OK);
 
         int step = sqlite3_step(res);
         REQUIRE(step == SQLITE_ROW);
@@ -58,10 +58,11 @@ TEST_CASE("Test Authentification class") {
         std::cin.rdbuf(input.rdbuf());
 
         auth.LogIn();
-        REQUIRE(true);
-        REQUIRE(true);
 
         std::cin.rdbuf(std::cin.rdbuf());
+
+        REQUIRE(auth.getSurname() == "test");
+        REQUIRE(auth.getUserType() == 1);
     }
 
 }
@@ -76,6 +77,7 @@ TEST_CASE("Test Admin class") {
 
     SECTION("Test Insert") 
     {
+        int rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, owner) VALUES ('TestHorse1', 5, 3, 'TestOwner1')", nullptr, nullptr, nullptr);
 
         std::stringstream input("2022-01-01\n1\n1\n1\n1\n");
         std::cin.rdbuf(input.rdbuf());
