@@ -3,6 +3,7 @@
 #include "../inc/authentification.h"
 #include "../inc/admin.h"
 #include "../inc/jockey.h"
+#include "../inc/owner.h"
 #include <sstream>
 #include <sqlite3.h>
 
@@ -151,8 +152,6 @@ std::string execute_and_capture(const std::function<void()>& func) {
 
 
 TEST_CASE("Test Jockey class") {
-    REQUIRE(rc == SQLITE_OK);
-
     std::stringstream input("3\n");
     std::cin.rdbuf(input.rdbuf());
 
@@ -162,7 +161,7 @@ TEST_CASE("Test Jockey class") {
   
     SECTION("Test Select3") 
     {
-        rc = sqlite3_exec(db, "INSERT INTO jockeys (surname) VALUES ('TestJockey')", nullptr, nullptr, nullptr);
+        int rc = sqlite3_exec(db, "INSERT INTO jockeys (surname) VALUES ('TestJockey')", nullptr, nullptr, nullptr);
         REQUIRE(rc == SQLITE_OK);
 
         rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, owner) VALUES ('TestHorse', 5, 10, 'TestOwner')", nullptr, nullptr, nullptr);
@@ -190,7 +189,7 @@ TEST_CASE("Test Jockey class") {
 
     SECTION("Test Select3") 
     {
-        rc = sqlite3_exec(db, "INSERT INTO jockeys (surname) VALUES ('TestJockey2')", nullptr, nullptr, nullptr);
+        int rc = sqlite3_exec(db, "INSERT INTO jockeys (surname) VALUES ('TestJockey2')", nullptr, nullptr, nullptr);
         REQUIRE(rc == SQLITE_OK);
 
         auto output = execute_and_capture([&jockey2]() {
@@ -205,10 +204,7 @@ TEST_CASE("Test Jockey class") {
     sqlite3_close(db);
 }
 
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
 
-#include "../inc/owner.h"
 
 TEST_CASE("Test Owner::Select1 output") {
     sqlite3* db;
@@ -237,9 +233,7 @@ TEST_CASE("Test Owner::Select1 output") {
 }
 
 TEST_CASE("Test Owner::Select4 output") {
-    REQUIRE(rc == SQLITE_OK);
-
-    rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, price, owner) VALUES ('TestHorse', 5, 10, 1000, 'TestOwner')", nullptr, nullptr, nullptr);
+    int rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, price, owner) VALUES ('TestHorse', 5, 10, 1000, 'TestOwner')", nullptr, nullptr, nullptr);
     REQUIRE(rc == SQLITE_OK);
 
     rc = sqlite3_exec(db, "INSERT INTO races (date, jockey_id, horse_id, price, taken_place) VALUES ('2023-03-15', 1, 1, 1000, 1)", nullptr, nullptr, nullptr);
