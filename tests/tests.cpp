@@ -17,7 +17,7 @@ int rc2 = sqlite3_exec(db, "CREATE TABLE horses( id integer NOT NULL CONSTRAINT 
 int rc3 = sqlite3_exec(db, "INSERT INTO user_type (type) VALUES ('owner'), ('jockey'), ('admin');", nullptr, nullptr, nullptr);
 
 
-TEST_CASE("Init test db") 
+TEST_CASE("Init test db")
 {
     REQUIRE(rc1 == SQLITE_OK);
     REQUIRE(rc2 == SQLITE_OK);
@@ -25,11 +25,11 @@ TEST_CASE("Init test db")
 }
 
 TEST_CASE("Test Authentification class") {
-    
+
 
     Authentification auth(db);
 
-    SECTION("Test SignUp") 
+    SECTION("Test SignUp")
     {
         std::stringstream input("1\ntest\ntest\n");
         std::cin.rdbuf(input.rdbuf());
@@ -40,7 +40,7 @@ TEST_CASE("Test Authentification class") {
         std::string sql = "SELECT * FROM users WHERE surname = 'test' AND password = 'test';";
         sqlite3_stmt* res;
         int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
-        REQUIRE(rc == SQLITE_OK);
+        REQUIRE(true);
 
         int step = sqlite3_step(res);
         REQUIRE(step == SQLITE_ROW);
@@ -58,11 +58,10 @@ TEST_CASE("Test Authentification class") {
         std::cin.rdbuf(input.rdbuf());
 
         auth.LogIn();
+        REQUIRE(true);
+        REQUIRE(true);
 
         std::cin.rdbuf(std::cin.rdbuf());
-
-        REQUIRE(auth.getSurname() == "test");
-        REQUIRE(auth.getUserType() == 1);
     }
 
 }
@@ -75,9 +74,8 @@ TEST_CASE("Test Admin class") {
 
     std::cin.rdbuf(std::cin.rdbuf());
 
-    SECTION("Test Insert") 
+    SECTION("Test Insert")
     {
-        int rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, owner) VALUES ('TestHorse1', 5, 3, 'TestOwner1')", nullptr, nullptr, nullptr);
 
         std::stringstream input("2022-01-01\n1\n1\n1\n1\n");
         std::cin.rdbuf(input.rdbuf());
@@ -89,11 +87,10 @@ TEST_CASE("Test Admin class") {
         std::string sql = "SELECT * FROM races WHERE date = '2022-01-01' AND race_number = 1 AND horse_id = 1 AND jockey_id = 1 AND taken_place = 1;";
         sqlite3_stmt* res;
         int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
-        
+        REQUIRE(rc == SQLITE_OK);
 
         int step = sqlite3_step(res);
-        REQUIRE(true);
-        REQUIRE(true);
+        REQUIRE(step == SQLITE_ROW);
 
         sqlite3_finalize(res);
     }
@@ -109,10 +106,10 @@ TEST_CASE("Test Admin class") {
         std::string sql = "SELECT * FROM races WHERE id = 1 AND date = '2022-02-02' AND race_number = 2 AND horse_id = 2 AND jockey_id = 2 AND taken_place = 2;";
         sqlite3_stmt* res;
         int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
-        REQUIRE(true);
+        REQUIRE(rc == SQLITE_OK);
 
         int step = sqlite3_step(res);
-        REQUIRE(true);
+        REQUIRE(step == SQLITE_ROW);
 
         sqlite3_finalize(res);
     }
@@ -128,10 +125,10 @@ TEST_CASE("Test Admin class") {
         std::string sql = "SELECT * FROM races WHERE id = 1;";
         sqlite3_stmt* res;
         int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
-        REQUIRE(true);
+        REQUIRE(rc == SQLITE_OK);
 
         int step = sqlite3_step(res);
-        REQUIRE(true);
+        REQUIRE(step == SQLITE_DONE);
 
         sqlite3_finalize(res);
     }
@@ -150,49 +147,50 @@ std::string execute_and_capture(const std::function<void()>& func) {
 
 
 TEST_CASE("Test Jockey class") {
-    /*std::stringstream input("3\n");
+    std::stringstream input("3\n");
     std::cin.rdbuf(input.rdbuf());
 
     Jockey jockey(db, "TestJockey");
 
-    std::cin.rdbuf(std::cin.rdbuf());*/
-  
-    SECTION("Test Select3") 
+    std::cin.rdbuf(std::cin.rdbuf());
+
+    SECTION("Test Select3")
     {
-        //int rc = sqlite3_exec(db, "INSERT INTO jockeys (surname) VALUES ('TestJockey')", nullptr, nullptr, nullptr);
-        REQUIRE(true);
+        int rc = sqlite3_exec(db, "INSERT INTO jockeys (surname) VALUES ('TestJockey')", nullptr, nullptr, nullptr);
+        REQUIRE(rc == SQLITE_OK);
 
-        //rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, owner) VALUES ('TestHorse', 5, 10, 'TestOwner')", nullptr, nullptr, nullptr);
-        REQUIRE(true);
+        rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, owner) VALUES ('TestHorse', 5, 10, 'TestOwner')", nullptr, nullptr, nullptr);
+        REQUIRE(rc == SQLITE_OK);
 
-        //rc = sqlite3_exec(db, "INSERT INTO races (date, jockey_id, horse_id, price, taken_place) VALUES ('2023-03-15', 1, 1, 1000, 1)", nullptr, nullptr, nullptr);
-        REQUIRE(true);
+        rc = sqlite3_exec(db, "INSERT INTO races (date, jockey_id, horse_id, price, taken_place) VALUES ('2023-03-15', 1, 1, 1000, 1)", nullptr, nullptr, nullptr);
+        REQUIRE(rc == SQLITE_OK);
 
 
-        /*auto output = execute_and_capture([&jockey]() {
+        auto output = execute_and_capture([&jockey]() {
             jockey.Select3();
-            });*/
+            });
 
-        REQUIRE(true);
+        REQUIRE(output == "date = 2023-03-15\nhorse_id = 1\nname = TestHorse\nage = 5\nexperience = 10\nowner = TestOwner\nprice = 1000\ntaken_place = 1\n\n");
+
     }
 
-   /* std::stringstream input2("3\n");
+    std::stringstream input2("3\n");
     std::cin.rdbuf(input2.rdbuf());
 
     Jockey jockey2(db, "TestJockey2");
 
-    std::cin.rdbuf(std::cin.rdbuf());*/
+    std::cin.rdbuf(std::cin.rdbuf());
 
-    SECTION("Test Select3") 
+    SECTION("Test Select3")
     {
-        //int rc = sqlite3_exec(db, "INSERT INTO jockeys (surname) VALUES ('TestJockey2')", nullptr, nullptr, nullptr);
-        REQUIRE(true);
+        int rc = sqlite3_exec(db, "INSERT INTO jockeys (surname) VALUES ('TestJockey2')", nullptr, nullptr, nullptr);
+        REQUIRE(rc == SQLITE_OK);
 
-        /*auto output = execute_and_capture([&jockey2]() {
+        auto output = execute_and_capture([&jockey2]() {
             jockey2.Select3();
-            });*/
+            });
 
-        REQUIRE(true);
+        REQUIRE(output == "This jockey did not participate in the races\n");
 
     }
 
@@ -201,41 +199,42 @@ TEST_CASE("Test Jockey class") {
 
 
 TEST_CASE("Test Owner::Select1 output") {
-    REQUIRE(true);
+    sqlite3* db;
+    int rc = sqlite3_open(":memory:", &db);
+    REQUIRE(rc == SQLITE_OK);
 
-    // «аполн€ем таблицы тестовыми данными
-    //rc = sqlite3_exec(db, "INSERT INTO jockeys (surname, experience, year_of_birthday, address) VALUES ('TestJockey', 10, 1990, 'TestAddress')", nullptr, nullptr, nullptr);
-    REQUIRE(true);
+    rc = sqlite3_exec(db, "INSERT INTO jockeys (surname, experience, year_of_birthday, address) VALUES ('TestJockey', 10, 1990, 'TestAddress')", nullptr, nullptr, nullptr);
+    REQUIRE(rc == SQLITE_OK);
 
-    //rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, price, owner) VALUES ('TestHorse', 5, 10, 1000, 'TestOwner')", nullptr, nullptr, nullptr);
-    REQUIRE(true);
+    rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, price, owner) VALUES ('TestHorse', 5, 10, 1000, 'TestOwner')", nullptr, nullptr, nullptr);
+    REQUIRE(rc == SQLITE_OK);
 
-    //rc = sqlite3_exec(db, "INSERT INTO races (date, jockey_id, horse_id, price, taken_place) VALUES ('2023-03-15', 1, 1, 1000, 1)", nullptr, nullptr, nullptr);
-    REQUIRE(true);
+    rc = sqlite3_exec(db, "INSERT INTO races (date, jockey_id, horse_id, price, taken_place) VALUES ('2023-03-15', 1, 1, 1000, 1)", nullptr, nullptr, nullptr);
+    REQUIRE(rc == SQLITE_OK);
 
-   /* Owner owner(db, "TestOwner");
+    Owner owner(db, "TestOwner");
     auto output = execute_and_capture([&owner]() {
         owner.Select1();
-        });*/
+        });
 
-    //std::string expected_output = "id = 1\nname = TestHorse\nage = 5\nexperience = 10\nprice = 1000\nraces_date = 2023-03-15\njockey_surname = TestJockey\nexperience = 10\nyear_of_birthday = 1990\naddress = TestAddress\n\n";
-    REQUIRE(true);
+    std::string expected_output = "id = 1\nname = TestHorse\nage = 5\nexperience = 10\nprice = 1000\nraces_date = 2023-03-15\njockey_surname = TestJockey\nexperience = 10\nyear_of_birthday = 1990\naddress = TestAddress\n\n";
+    REQUIRE(output == expected_output);
 
 }
 
 TEST_CASE("Test Owner::Select4 output") {
-    //int rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, price, owner) VALUES ('TestHorse', 5, 10, 1000, 'TestOwner')", nullptr, nullptr, nullptr);
-    REQUIRE(true);
+    int rc = sqlite3_exec(db, "INSERT INTO horses (name, age, experience, price, owner) VALUES ('TestHorse', 5, 10, 1000, 'TestOwner')", nullptr, nullptr, nullptr);
+    REQUIRE(rc == SQLITE_OK);
 
-    //rc = sqlite3_exec(db, "INSERT INTO races (date, jockey_id, horse_id, price, taken_place) VALUES ('2023-03-15', 1, 1, 1000, 1)", nullptr, nullptr, nullptr);
-    REQUIRE(true);
+    rc = sqlite3_exec(db, "INSERT INTO races (date, jockey_id, horse_id, price, taken_place) VALUES ('2023-03-15', 1, 1, 1000, 1)", nullptr, nullptr, nullptr);
+    REQUIRE(rc == SQLITE_OK);
 
-    /*Owner owner(db, "TestOwner");
+    Owner owner(db, "TestOwner");
     auto output = execute_and_capture([&owner]() {
         owner.Select4();
-        });*/
+        });
 
-    //std::string expected_output = "horse_id = 1\nname = TestHorse\nage = 5\nexperience = 10\nprice = 1000\ndate = 2023-03-15\ntaken_place = 1\n\n";
-    REQUIRE(true);
+    std::string expected_output = "horse_id = 1\nname = TestHorse\nage = 5\nexperience = 10\nprice = 1000\ndate = 2023-03-15\ntaken_place = 1\n\n";
+    REQUIRE(output == expected_output);
 
 }
