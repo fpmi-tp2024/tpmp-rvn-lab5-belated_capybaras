@@ -67,17 +67,17 @@ TEST_CASE("Test Authentification class") {
 }
 
 TEST_CASE("Test Admin class") {
-    /*std::stringstream input("8\n");
+    std::stringstream input("8\n");
     std::cin.rdbuf(input.rdbuf());
 
     Admin admin(db);
 
-    std::cin.rdbuf(std::cin.rdbuf());*/
+    std::cin.rdbuf(std::cin.rdbuf());
 
     SECTION("Test Insert") 
     {
 
-   /*     std::stringstream input("2022-01-01\n1\n1\n1\n1\n");
+        std::stringstream input("2022-01-01\n1\n1\n1\n1\n");
         std::cin.rdbuf(input.rdbuf());
 
         admin.Insert();
@@ -89,34 +89,34 @@ TEST_CASE("Test Admin class") {
         int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
         
 
-        int step = sqlite3_step(res);*/
+        int step = sqlite3_step(res);
         REQUIRE(true);
         REQUIRE(true);
 
-        //sqlite3_finalize(res);
+        sqlite3_finalize(res);
     }
 
     SECTION("Test Update") {
-        //std::stringstream input("1\n2022-02-02\n2\n2\n2\n2\n");
-        //std::cin.rdbuf(input.rdbuf());
+        std::stringstream input("1\n2022-02-02\n2\n2\n2\n2\n");
+        std::cin.rdbuf(input.rdbuf());
 
-        ////admin.Update();
+        admin.Update();
 
-        //std::cin.rdbuf(std::cin.rdbuf());
+        std::cin.rdbuf(std::cin.rdbuf());
 
-        //std::string sql = "SELECT * FROM races WHERE id = 1 AND date = '2022-02-02' AND race_number = 2 AND horse_id = 2 AND jockey_id = 2 AND taken_place = 2;";
-        //sqlite3_stmt* res;
-        //int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
+        std::string sql = "SELECT * FROM races WHERE id = 1 AND date = '2022-02-02' AND race_number = 2 AND horse_id = 2 AND jockey_id = 2 AND taken_place = 2;";
+        sqlite3_stmt* res;
+        int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
         REQUIRE(true);
 
-        //int step = sqlite3_step(res);
+        int step = sqlite3_step(res);
         REQUIRE(true);
 
-        //sqlite3_finalize(res);
+        sqlite3_finalize(res);
     }
 
     SECTION("Test Delete") {
-       /* std::stringstream input("1\n");
+        std::stringstream input("1\n");
         std::cin.rdbuf(input.rdbuf());
 
         admin.Delete();
@@ -125,13 +125,13 @@ TEST_CASE("Test Admin class") {
 
         std::string sql = "SELECT * FROM races WHERE id = 1;";
         sqlite3_stmt* res;
-        int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);*/
+        int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &res, 0);
         REQUIRE(true);
 
-        //int step = sqlite3_step(res);
+        int step = sqlite3_step(res);
         REQUIRE(true);
 
-        //sqlite3_finalize(res);
+        sqlite3_finalize(res);
     }
 
 }
