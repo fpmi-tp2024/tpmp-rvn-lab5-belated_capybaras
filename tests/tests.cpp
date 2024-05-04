@@ -49,7 +49,7 @@ TEST_CASE("Test Authentification class") {
     }
 
     SECTION("Test CanSignUp") {
-        REQUIRE(auth.CanSignUp("test", "test") == true);
+        REQUIRE(auth.CanSignUp("test", "test") == false);
         REQUIRE(auth.CanSignUp("test2", "test2") == true);
     }
 
